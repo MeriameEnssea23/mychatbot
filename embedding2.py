@@ -123,14 +123,14 @@ for filename in os.listdir(pdf_directory):
                 client = Mistral(api_key=my_api_key)
                 messages = [
                     {"role": "system", "content": "You are an assistant that converts JSON tables into structured text."},
-                    {"role": "user", "content": f"""Transform all these data into a smooth structured text, do not summarize or omit information. Replace the letter (e) before numerical value by the word estimated. If the year is not mentioned in the data do not make any assumptions about the year. If year is mentioned in the data use it every time it is mentioned. Do not condense the information. Generate a complete and accurate response without leaving anything out: {json.dumps(all_data_json, indent=1)}"""}
+                    {"role": "user", "content": f"""Transform all these data into a smooth structured text,do not invent, do not summarize or omit information. Replace the letter (e) before numerical value by the word estimated. If the year is not mentioned in the data do not make any assumptions about the year. If year is mentioned in the data use it every time it is mentioned. Do not condense the information. Generate a complete and accurate response without leaving anything out: {json.dumps(all_data_json, indent=1)}"""}
                 ]
 
                 try:
                     completion = client.chat.complete(
                         model="mistral-medium-latest",
                         messages=messages,
-                        temperature=0.5,
+                        temperature=0.3,
                         max_tokens=8192,
                         top_p=1.0,
                         stream=False
